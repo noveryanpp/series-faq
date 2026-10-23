@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>FAQs</title>
+	</head>
+	<body>
+		<main>
+			<section class="faq-header">
+				<h1 class="faq-title">
+					<span class="line1">Frequently</span><br />
+					<span class="line2">Asked</span><br />
+					<span class="line2">Questions</span>
+				</h1>
+			</section>
+
+			<section class="faq-grid">
+				<div class="faq-col"></div>
+				<div class="faq-col"></div>
+				<div class="faq-col"></div>
+			</section>
+		</main>
+
+		<script>
+			const faqData = [
+				{
+					number: "01",
+					question: "Apa itu HTML dan mengapa penting?",
+					answer:
+						"HTML (HyperText Markup Language) adalah bahasa markup standar untuk membuat struktur halaman web, seperti teks, gambar, dan tautan agar dapat ditampilkan di browser.",
+					active: false,
+				},
+				{
+					number: "02",
+					question: "Menghubungkan CSS ke HTML?",
+					answer:
+						"CSS dapat dihubungkan ke HTML melalui tiga cara: Inline CSS (atribut style), Internal CSS (tag <style> di dalam <head>), atau External CSS (menggunakan tag <link> ke file .css terpisah).",
+					active: false,
+				},
+				{
+					number: "03",
+					question: "Apa fungsi utama JavaScript?",
+					answer:
+						"JavaScript memberikan interaktivitas pada halaman web, seperti validasi, galeri gambar dinamis, dan pembaruan konten.",
+					active: false,
+				},
+				{
+					number: "04",
+					question: "Mengapa desain responsif itu krusial?",
+					answer:
+						"Desain responsif memastikan tampilan website menyesuaikan secara optimal di berbagai ukuran layar (desktop, tablet, dan ponsel), sehingga meningkatkan kenyamanan pengguna.",
+					active: false,
+				},
+				{
+					number: "05",
+					question: "Apa perbedaan antara Flexbox dan CSS Grid?",
+					answer:
+						"Flexbox dirancang untuk tata letak satu dimensi (baris saja atau kolom saja), sedangkan CSS Grid dirancang untuk tata letak dua dimensi (baris dan kolom secara bersamaan).",
+					active: false,
+				},
+				{
+					number: "06",
+					question: "Kapan sebaiknya saya menggunakan framework CSS?",
+					answer:
+						"Gunakan framework CSS ketika ingin mempercepat proses pengembangan, menjaga konsistensi desain pada proyek besar, atau bekerja dalam tim dengan komponen siap pakai.",
+					active: false,
+				},
+				{
+					number: "07",
+					question: "Bagaimana cara kerja caching browser?",
+					answer:
+						"Browser menyimpan salinan file statis (seperti gambar, CSS, dan JS) secara lokal di perangkat pengguna agar halaman web dapat dimuat jauh lebih cepat saat dikunjungi kembali.",
+					active: false,
+				},
+				{
+					number: "08",
+					question: "Apa perbedaan GET dan POST request?",
+					answer:
+						"GET digunakan untuk mengambil data dari server dengan parameter yang terlihat di URL, sedangkan POST digunakan untuk mengirim data ke server di dalam body request secara lebih aman.",
+					active: false,
+				},
+				{
+					number: "09",
+					question: "Apa kegunaan utama dari SQL database?",
+					answer:
+						"SQL database digunakan untuk menyimpan, mengelola, dan mengambil data terstruktur yang saling berelasi secara efisien dan konsisten menggunakan perintah query standar.",
+					active: false,
+				},
+			];
+
+			function createFaqCard(item, index) {
+				return `
+        <article class="faq-card ${item.active ? "active" : ""}" style="order: ${index}">
+          <button class="faq-btn">
+            <span class="faq-number">${item.number}</span>
+            <span class="faq-question">${item.question}</span>
+            <span class="faq-toggle">${item.active ? "−" : "+"}</span>
+          </button>
+          <div class="faq-answer">
+            <p>${item.answer}</p>
+          </div>
+        </article>
+      `;
+			}
+
+			const columns = document.querySelectorAll(".faq-col");
+			faqData.forEach(function (item, index) {
+				columns[index % 3].innerHTML += createFaqCard(item, index);
+			});
+
+			const faqButtons = document.querySelectorAll(".faq-btn");
+			faqButtons.forEach(function (btn) {
+				btn.addEventListener("click", function () {
+					const card = btn.closest(".faq-card");
+					const toggle = btn.querySelector(".faq-toggle");
+
+					card.classList.toggle("active");
+					toggle.textContent = card.classList.contains("active") ? "−" : "+";
+				});
+			});
+		</script>
+	</body>
+</html>
